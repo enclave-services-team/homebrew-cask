@@ -7,9 +7,11 @@ cask "cold-turkey-blocker" do
   desc "Block websites, games and applications"
   homepage "https://getcoldturkey.com/"
 
+  # The `href` attribute of the download link is set dynamically using inline JavaScript.
+  # The `v` parameter is used for cache busting and does not affect the returned data.
   livecheck do
-    url :url
-    strategy :extract_plist
+    url "https://getcoldturkey.com/news/"
+    regex(/Cold[._-]Turkey[._-]Mac[._-]Installer\.pkg\?v=(\d+(?:\.\d+)+)/i)
   end
 
   pkg "Cold_Turkey_Mac_Installer.pkg"
